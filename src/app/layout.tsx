@@ -7,6 +7,8 @@ import NavBar from "./NavBar";
 import { Theme, ThemePanel } from "@radix-ui/themes";
 import { inter } from "./fonts";
 import "@/app/theme-config.css"
+import 'bytemd/dist/index.css'
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
