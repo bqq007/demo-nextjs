@@ -29,17 +29,7 @@ const NewIssuePage = () => {
   const router = useRouter()
   const [error,setError]= useState("")
   const [isSubmitting,setIsSubmitting] = useState(false)
-  
-  return (
-    <div className='max-w-xl'>
-      {
-        error && (
-          <Callout.Root color='red' className='mb-5'>
-            <Callout.Text>{error}</Callout.Text>
-          </Callout.Root>
-        )
-      }
-      <form className='space-y-3' onSubmit={handleSubmit(async (data)=>{
+  const onSubmit = handleSubmit(async (data)=>{
         try {
           await axios.post('/api/issues', data)
             .then(response => {
@@ -55,7 +45,18 @@ const NewIssuePage = () => {
           console.error('Error creating issue:', error);
           setError('An unexpected error occurred while creating the issue. Please try again later.');
         }
-      })}>
+      })
+
+  return (
+    <div className='max-w-xl'>
+      {
+        error && (
+          <Callout.Root color='red' className='mb-5'>
+            <Callout.Text>{error}</Callout.Text>
+          </Callout.Root>
+        )
+      }
+      <form className='space-y-3' onSubmit={onSubmit}>
         <TextField.Root placeholder="Please enter the title of the issue" {...register('title')}>
         </TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
